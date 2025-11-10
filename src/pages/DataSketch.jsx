@@ -33,14 +33,14 @@ function dataSketch(p5) {
     
     // Draw bars for each name
     let yPos = 80
-    let maxCount = Math.max(...babyNames.map(name => parseInt(name.count)))
+    let maxCount = Math.max(...babyNames.map(name => parseInt(name.cnt)))
     
     babyNames.forEach((name, index) => {
-      let count = parseInt(name.count)
+      let count = parseInt(name.cnt)
       let barWidth = p5.map(count, 0, maxCount, 0, 600)
       
       // Color based on gender
-      if (name.gender === 'FEMALE') {
+      if (name.gndr === 'FEMALE') {
         p5.fill(255, 100, 150)
       } else {
         p5.fill(100, 150, 255)
@@ -52,7 +52,7 @@ function dataSketch(p5) {
       // Draw name and count
       p5.fill(50)
       p5.textSize(14)
-      p5.text(name.childs_first_name, 20, yPos + 12)
+      p5.text(name.nm, 20, yPos + 12)
       p5.text(count, 760, yPos + 12)
       
       yPos += 35
@@ -83,7 +83,8 @@ function DataSketch() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          'https://data.cityofnewyork.us/resource/25th-nujf.json?year_of_birth=2023&$order=count DESC&$limit=10'
+          'https://data.cityofnewyork.us/resource/25th-nujf.json?brth_yr=2021&$order=cnt DESC&$limit=10'
+          //'https://data.cityofnewyork.us/resource/25th-nujf.json?brth_yr=2024&$order=cnt DESC&$limit=10'
         )
         
         if (!response.ok) {

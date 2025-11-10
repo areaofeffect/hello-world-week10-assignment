@@ -54,6 +54,10 @@ function BasicSketch() {
       <div style={{ marginTop: '20px' }}>
         <ReactP5Wrapper sketch={sketch} />
       </div>
+
+      <div style={{ marginTop: '20px' }}>
+        <ReactP5Wrapper sketch={sketch} />
+      </div>
       
       <div style={{ 
         marginTop: '20px', 
