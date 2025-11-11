@@ -35,8 +35,8 @@ function Home() {
         backgroundColor: '#f0f8ff',
         borderRadius: '8px'
       }}>
-        <h2>Filter by Gender:</h2>
-        <p>View the most popular baby names filtered by gender:</p>
+        <h2>Filter by Birth Certificate Gender:</h2>
+        <p>View the most popular baby names filtered by gender as recorded on NYC birth certificates:</p>
         <div style={{
           display: 'flex',
           gap: '15px',
@@ -55,7 +55,7 @@ function Home() {
               transition: 'background-color 0.3s'
             }}
           >
-            Male Names
+            Male Names (as recorded)
           </Link>
           <Link
             to="/data?gender=female"
@@ -69,7 +69,7 @@ function Home() {
               transition: 'background-color 0.3s'
             }}
           >
-            Female Names
+            Female Names (as recorded)
           </Link>
           <Link
             to="/data"

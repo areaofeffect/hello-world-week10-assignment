@@ -55,13 +55,14 @@ This demo uses the **Popular Baby Names** dataset:
 - **Dataset**: https://data.cityofnewyork.us/Health/Popular-Baby-Names/25th-nujf
 - **API Endpoint**: `https://data.cityofnewyork.us/resource/25th-nujf.json`
 - **No API key required** for basic queries (limited to 1000 requests/day)
+- **Note**: This dataset uses binary gender categories as collected by NYC vital records
 
 ### Example Query Parameters
 ```
-?year_of_birth=2023          # Filter by year
+?brth_yr=2021                # Filter by birth year
 ?$limit=20                   # Limit results
-?gender=FEMALE               # Filter by gender
-?$order=count DESC           # Sort by count
+?gndr=FEMALE                 # Filter by recorded gender (MALE/FEMALE)
+?$order=cnt DESC             # Sort by count
 ```
 
 ## Tips for Students

@@ -38,8 +38,8 @@ function dataSketch(p5) {
     babyNames.forEach((name, index) => {
       let count = parseInt(name.cnt)
       let barWidth = p5.map(count, 0, maxCount, 0, 600)
-      
-      // Color based on gender
+
+      // Color based on recorded gender
       if (name.gndr === 'FEMALE') {
         p5.fill(255, 100, 150)
       } else {
@@ -78,7 +78,7 @@ function DataSketch() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  // Get gender filter from query params
+  // Get recorded gender filter from query params
   const genderFilter = searchParams.get('gender')
 
   useEffect(() => {
@@ -86,7 +86,7 @@ function DataSketch() {
     // This gets the top 10 most popular baby names from 2021
     const fetchData = async () => {
       try {
-        // Build API URL with optional gender filter
+        // Build API URL with optional recorded gender filter
         let apiUrl = 'https://data.cityofnewyork.us/resource/25th-nujf.json?brth_yr=2021&$order=cnt DESC&$limit=10'
 
         if (genderFilter) {
