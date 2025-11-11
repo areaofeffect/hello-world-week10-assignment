@@ -29,6 +29,65 @@ function Home() {
         </ul>
       </div>
 
+      <div style={{
+        marginTop: '30px',
+        padding: '20px',
+        backgroundColor: '#f0f8ff',
+        borderRadius: '8px'
+      }}>
+        <h2>Filter by Gender:</h2>
+        <p>View the most popular baby names filtered by gender:</p>
+        <div style={{
+          display: 'flex',
+          gap: '15px',
+          marginTop: '15px',
+          flexWrap: 'wrap'
+        }}>
+          <Link
+            to="/data?gender=male"
+            style={{
+              padding: '12px 24px',
+              backgroundColor: '#2196F3',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '6px',
+              fontWeight: '500',
+              transition: 'background-color 0.3s'
+            }}
+          >
+            Male Names
+          </Link>
+          <Link
+            to="/data?gender=female"
+            style={{
+              padding: '12px 24px',
+              backgroundColor: '#E91E63',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '6px',
+              fontWeight: '500',
+              transition: 'background-color 0.3s'
+            }}
+          >
+            Female Names
+          </Link>
+          <Link
+            to="/data"
+            style={{
+              padding: '12px 24px',
+              backgroundColor: '#757575',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '6px',
+              fontWeight: '500',
+              transition: 'background-color 0.3s'
+            }}
+          >
+            All Names
+          </Link>
+        </div>
+      </div>
+
       <div style={{ 
         marginTop: '40px', 
         padding: '20px', 

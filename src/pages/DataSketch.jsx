@@ -1,5 +1,5 @@
 import { ReactP5Wrapper } from '@p5-wrapper/react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 function dataSketch(p5) {
@@ -73,24 +73,32 @@ function dataSketch(p5) {
 }
 
 function DataSketch() {
+  const [searchParams] = useSearchParams()
   const [babyNames, setBabyNames] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  // Get gender filter from query params
+  const genderFilter = searchParams.get('gender')
+
   useEffect(() => {
     // Fetch data from NYC Open Data API
-    // This gets the top 10 most popular baby names from 2023
+    // This gets the top 10 most popular baby names from 2021
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          'https://data.cityofnewyork.us/resource/25th-nujf.json?brth_yr=2021&$order=cnt DESC&$limit=10'
-          //'https://data.cityofnewyork.us/resource/25th-nujf.json?brth_yr=2024&$order=cnt DESC&$limit=10'
-        )
-        
+        // Build API URL with optional gender filter
+        let apiUrl = 'https://data.cityofnewyork.us/resource/25th-nujf.json?brth_yr=2021&$order=cnt DESC&$limit=10'
+
+        if (genderFilter) {
+          apiUrl += `&gndr=${genderFilter.toUpperCase()}`
+        }
+
+        const response = await fetch(apiUrl)
+
         if (!response.ok) {
           throw new Error('Failed to fetch data')
         }
-        
+
         const data = await response.json()
         setBabyNames(data)
         setLoading(false)
@@ -101,7 +109,7 @@ function DataSketch() {
     }
 
     fetchData()
-  }, []) // Empty dependency array means this runs once when component mounts
+  }, [genderFilter]) // Re-fetch when gender filter changes
 
   return (
     <div style={{ padding: '20px', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
@@ -109,11 +117,23 @@ function DataSketch() {
         ← Back to Home
       </Link>
       <h1>NYC Open Data + P5</h1>
+      {genderFilter && (
+        <div style={{
+          padding: '10px',
+          backgroundColor: genderFilter.toUpperCase() === 'MALE' ? '#e3f2fd' : '#fce4ec',
+          borderRadius: '4px',
+          marginBottom: '10px',
+          display: 'inline-block'
+        }}>
+          Showing: <strong>{genderFilter.toUpperCase()}</strong> names only
+          {' '}<Link to="/data" style={{ color: '#0066cc', marginLeft: '10px' }}>Clear filter</Link>
+        </div>
+      )}
       <p>
         This sketch fetches real data from the{' '}
-        <a 
-          href="https://data.cityofnewyork.us/Health/Popular-Baby-Names/25th-nujf" 
-          target="_blank" 
+        <a
+          href="https://data.cityofnewyork.us/Health/Popular-Baby-Names/25th-nujf"
+          target="_blank"
           rel="noopener noreferrer"
           style={{ color: '#0066cc' }}
         >
